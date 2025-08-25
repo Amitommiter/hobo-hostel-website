@@ -102,7 +102,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Hero Section - Modern & Clean */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image 
@@ -126,64 +126,64 @@ export default function HomePage() {
         <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-full blur-2xl animate-float animation-delay-400"></div>
 
         {/* Hero Content with Enhanced Buttons */}
-        <div className="relative z-10 text-white px-6 md:px-12 lg:px-20 max-w-7xl mx-auto h-full flex items-center">
-          <div className="w-full max-w-2xl space-y-8">
+        <div className="relative z-10 text-white px-6 md:px-12 lg:px-20 max-w-7xl mx-auto h-full flex items-center justify-center">
+          <div className="w-full max-w-2xl space-y-6 md:space-y-8">
 
             {/* Main Heading with Enhanced Typography */}
-            <div className="space-y-6 animate-fade-in-up animation-delay-200">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight group">
+            <div className="space-y-4 md:space-y-6 animate-fade-in-up animation-delay-200">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight group text-center md:text-left">
                 <span className="block text-white drop-shadow-2xl animate-slide-in-left group-hover:scale-105 transition-transform duration-500">Welcome to</span>
                 <span className="block drop-shadow-2xl group-hover:scale-110 transition-transform duration-500 cursor-pointer">
                   <span className="typewriter-text text-yellow-300">Hobo Hostel</span>
                 </span>
               </h1>
-              <p className="text-lg md:text-xl lg:text-2xl text-white max-w-xl mx-auto text-center leading-relaxed drop-shadow-2xl font-light">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white max-w-xl mx-auto text-center leading-relaxed drop-shadow-2xl font-light">
                 Where <span className="text-yellow-300 font-normal">adventure meets comfort</span> in the heart of the Himalayas. 
                 Connect with fellow travelers and create memories that last a lifetime.
               </p>
             </div>
 
             {/* Enhanced CTA Buttons with Micro-interactions */}
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 animate-fade-in-up animation-delay-400">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-6 animate-fade-in-up animation-delay-400">
               <Button 
                 size="lg" 
-                className="group bg-black/50 backdrop-blur-md hover:bg-black/70 text-white px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 border border-yellow-400/50 hover:border-yellow-400"
+                className="group bg-black/50 backdrop-blur-md hover:bg-black/70 text-white px-6 md:px-10 py-3 md:py-5 text-sm md:text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 border border-yellow-400/50 hover:border-yellow-400"
                 asChild
               >
                 <Link href="/rooms" className="flex items-center">
                   <span>Book Your Adventure</span>
-                  <ArrowRight className="ml-3 h-5 w-5 md:h-6 md:w-6 group-hover:translate-x-2 transition-transform duration-300" />
+                  <ArrowRight className="ml-2 md:ml-3 h-4 w-4 md:h-6 md:w-6 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
               </Button>
               
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="group border-2 border-white/60 text-white hover:bg-white/20 px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-semibold rounded-2xl backdrop-blur-md transition-all duration-500 hover:border-white/80 hover:scale-110 hover:-translate-y-1 shadow-2xl hover:shadow-white/25 bg-black/30"
+                className="group border-2 border-white/60 text-white hover:bg-white/20 px-6 md:px-10 py-3 md:py-5 text-sm md:text-lg font-semibold rounded-2xl backdrop-blur-md transition-all duration-500 hover:border-white/80 hover:scale-110 hover:-translate-y-1 shadow-2xl hover:shadow-white/25 bg-black/30"
                 asChild
               >
                 <Link href="/culture" className="flex items-center">
-                  <Mountain className="mr-3 h-5 w-5 md:h-6 md:w-6 group-hover:rotate-12 transition-transform duration-300" />
+                  <Mountain className="mr-2 md:mr-3 h-4 w-4 md:h-6 md:w-6 group-hover:rotate-12 transition-transform duration-300" />
                   Explore Culture
                 </Link>
               </Button>
             </div>
 
             {/* Enhanced Stats with Hover Effects */}
-            <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-xl pt-8 md:pt-12 animate-fade-in-up animation-delay-600">
+            <div className="grid grid-cols-3 gap-3 md:gap-8 max-w-xl pt-6 md:pt-12 animate-fade-in-up animation-delay-600">
               {[
                 { number: "500+", label: "Happy Travelers", icon: Users },
                 { number: "4.9★", label: "Average Rating", icon: Star },
                 { number: "24/7", label: "Support", icon: Heart }
               ].map((stat, index) => (
                 <div key={index} className="text-center group cursor-pointer transform hover:scale-110 transition-all duration-300">
-                  <div className="w-12 h-12 md:w-16 md:h-16 bg-black/40 backdrop-blur-md rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:bg-black/60 transition-all duration-300 border border-white/20">
-                    <stat.icon className="h-6 w-6 md:h-8 md:w-8 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-300" />
+                  <div className="w-10 h-10 md:w-16 md:h-16 bg-black/40 backdrop-blur-md rounded-lg md:rounded-2xl flex items-center justify-center mx-auto mb-1 md:mb-3 group-hover:bg-black/60 transition-all duration-300 border border-white/20">
+                    <stat.icon className="h-5 w-5 md:h-8 md:w-8 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-300" />
                   </div>
-                  <div className="text-lg md:text-2xl font-bold text-white group-hover:text-yellow-300 transition-colors duration-300 bg-black/30 px-2 md:px-4 py-1 md:py-2 rounded-lg backdrop-blur-sm">
+                  <div className="text-sm md:text-2xl font-bold text-white group-hover:text-yellow-300 transition-colors duration-300 bg-black/30 px-1 md:px-4 py-1 md:py-2 rounded-lg backdrop-blur-sm">
                     {stat.number}
                   </div>
-                  <div className="text-xs md:text-sm text-white group-hover:text-yellow-200 transition-colors duration-300 font-medium">
+                  <div className="text-xs md:text-sm text-white group-hover:text-yellow-200 transition-colors duration-300 font-medium leading-tight">
                     {stat.label}
                   </div>
                 </div>
