@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  images: {
+    qualities: [25, 50, 75, 85, 100],
+    formats: ['image/webp', 'image/avif'],
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
+  // Fix for the lockfile warning
+  outputFileTracingRoot: process.cwd(),
+}
 
-export default nextConfig;
+export default nextConfig

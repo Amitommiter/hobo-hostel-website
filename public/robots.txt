@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow hidden check-in form
+Disallow: /forms/checkin
+
+# Sitemap
+Sitemap: https://hobohostel.com/sitemap.xml

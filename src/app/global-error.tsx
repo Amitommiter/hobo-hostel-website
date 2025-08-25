@@ -1,0 +1,70 @@
+'use client'
+
+import { useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { AlertTriangle, RefreshCw } from 'lucide-react'
+
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    // Log the error to an error reporting service
+    console.error(error)
+  }, [error])
+
+  return (
+    <html>
+      <body>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50">
+          <div className="max-w-md mx-auto text-center p-8">
+            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <AlertTriangle className="w-8 h-8 text-red-600" />
+            </div>
+            
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+              Something went wrong!
+            </h1>
+            
+            <p className="text-gray-600 mb-6">
+              We encountered an unexpected error. Please try refreshing the page or contact support if the problem persists.
+            </p>
+            
+            <div className="space-y-3">
+              <Button
+                onClick={reset}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Try again
+              </Button>
+              
+              <Button
+                variant="outline"
+                onClick={() => window.location.href = '/'}
+                className="w-full"
+              >
+                Go to Home
+              </Button>
+            </div>
+            
+            {process.env.NODE_ENV === 'development' && (
+              <details className="mt-6 text-left">
+                <summary className="cursor-pointer text-sm text-gray-500 hover:text-gray-700">
+                  Error Details (Development)
+                </summary>
+                <pre className="mt-2 text-xs text-red-600 bg-red-50 p-3 rounded overflow-auto">
+                  {error.message}
+                </pre>
+              </details>
+            )}
+          </div>
+        </div>
+      </body>
+    </html>
+  )
+}
+
