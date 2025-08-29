@@ -28,20 +28,35 @@ export function formatPhoneNumber(phone: string): string {
   return phone
 }
 
-export async function uploadFile(file: File, destinationPath: string): Promise<string> {
+export async function uploadFile(file: File, destinationPath: string, customFilename?: string): Promise<string> {
+  console.log('uploadFile called with:', { file: file.name, destinationPath, customFilename })
+  
   const formData = new FormData()
   formData.append('destinationPath', destinationPath)
+  formData.append('filename', customFilename || file.name)
   formData.append('imageFile', file)
+  
+  console.log('FormData contents:')
+  console.log('- destinationPath:', destinationPath)
+  console.log('- filename:', customFilename || file.name)
+  console.log('- imageFile:', file.name)
+  
+  console.log('Sending request to upload service...')
   
   const response = await fetch('https://uploadimage-q3deps5f7q-uc.a.run.app', {
     method: 'POST',
     body: formData
   })
   
+  console.log('Upload response status:', response.status)
+  
   if (!response.ok) {
-    throw new Error(`Upload failed: ${response.status}`)
+    const errorText = await response.text()
+    console.error('Upload failed:', errorText)
+    throw new Error(`Upload failed: ${response.status} - ${errorText}`)
   }
   
   const result = await response.json()
+  console.log('Upload result:', result)
   return result.url || result.downloadURL || result.imageUrl // Handle different response formats
 }

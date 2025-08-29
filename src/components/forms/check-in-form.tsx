@@ -134,7 +134,10 @@ export function CheckInForm() {
         const phoneSlug = formData.guest.phone.replace(/\D/g, '')
         const customFilename = `${nameSlug}-${phoneSlug}.${selectedFile.name.split('.').pop()}`
         
-        const uploadUrl = await uploadFile(selectedFile, 'ID Proofs')
+        console.log('Custom filename generated:', customFilename)
+        console.log('Original filename:', selectedFile.name)
+        
+        const uploadUrl = await uploadFile(selectedFile, 'ID Proofs', customFilename)
         console.log('File uploaded successfully:', uploadUrl)
         
         // Update form data with the uploaded URL
