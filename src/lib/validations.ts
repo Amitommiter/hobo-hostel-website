@@ -45,7 +45,7 @@ export interface ValidationError {
   message: string
 }
 
-export function validateGuestDetails(guest: GuestDetails): ValidationError[] {
+export function validateGuestDetails(guest: GuestDetails, segment: 'national' | 'international'): ValidationError[] {
   const errors: ValidationError[] = []
   
   if (!guest.name.trim()) {
@@ -71,7 +71,8 @@ export function validateGuestDetails(guest: GuestDetails): ValidationError[] {
     errors.push({ field: 'sex', message: 'Please select your sex' })
   }
   
-  if (!guest.nationality.trim()) {
+  // Only validate nationality for international guests
+  if (segment === 'international' && !guest.nationality.trim()) {
     errors.push({ field: 'nationality', message: 'Nationality is required' })
   }
   
@@ -177,7 +178,7 @@ export function validateCheckInForm(data: CheckInFormData): ValidationError[] {
   const errors: ValidationError[] = []
   
   // Validate guest details
-  errors.push(...validateGuestDetails(data.guest))
+  errors.push(...validateGuestDetails(data.guest, data.segment))
   
   // Validate stay details
   errors.push(...validateStayDetails(data.stay))

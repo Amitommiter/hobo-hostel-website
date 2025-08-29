@@ -25,6 +25,7 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { CheckInFormData, GuestDetails, StayDetails, ForeignDocuments, ValidationError, validateCheckInForm } from '@/lib/validations'
 import { submitCheckIn } from '@/lib/api'
+import { uploadFile } from '@/lib/utils'
 import { StayDetailsSection } from './stay-details-section'
 import { DocumentsSection } from './documents-section'
 
@@ -73,12 +74,17 @@ export function CheckInForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [checkInId, setCheckInId] = useState<string>('')
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const handleSegmentChange = (value: string) => {
     const segment = value as 'national' | 'international'
     setFormData(prev => ({
       ...prev,
       segment,
+      guest: {
+        ...prev.guest,
+        nationality: segment === 'national' ? '' : prev.guest.nationality
+      },
       documents: segment === 'national' ? initialForeignDocuments : initialForeignDocuments
     }))
     setErrors([])
@@ -115,17 +121,40 @@ export function CheckInForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    const validationErrors = validateCheckInForm(formData as CheckInFormData)
-    setErrors(validationErrors)
-    
-    if (validationErrors.length > 0) {
-      return
-    }
-    
     setIsSubmitting(true)
     setSubmitStatus('idle')
     
     try {
+      // Upload file if selected (for national guests)
+      if (formData.segment === 'national' && selectedFile && !formData.documents.idUploadUrl) {
+        console.log('Uploading file during submission...')
+        
+        // Generate filename using name-number format
+        const nameSlug = formData.guest.name.trim().toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+        const phoneSlug = formData.guest.phone.replace(/\D/g, '')
+        const customFilename = `${nameSlug}-${phoneSlug}.${selectedFile.name.split('.').pop()}`
+        
+        const uploadUrl = await uploadFile(selectedFile, 'ID Proofs')
+        console.log('File uploaded successfully:', uploadUrl)
+        
+        // Update form data with the uploaded URL
+        setFormData(prev => ({
+          ...prev,
+          documents: { ...prev.documents, idUploadUrl: uploadUrl }
+        }))
+        
+        // Wait a moment for state update
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
+      
+      const validationErrors = validateCheckInForm(formData as CheckInFormData)
+      setErrors(validationErrors)
+      
+      if (validationErrors.length > 0) {
+        setIsSubmitting(false)
+        return
+      }
+      
       const result = await submitCheckIn(formData as CheckInFormData)
       
       if (result.success) {
@@ -137,11 +166,13 @@ export function CheckInForm() {
           stay: initialStayDetails,
           documents: initialForeignDocuments
         })
+        setSelectedFile(null)
       } else {
         setSubmitStatus('error')
         setErrors([{ field: 'submit', message: result.error || 'Submission failed' }])
       }
-    } catch {
+    } catch (error) {
+      console.error('Submission error:', error)
       setSubmitStatus('error')
       setErrors([{ field: 'submit', message: 'An unexpected error occurred' }])
     } finally {
@@ -345,24 +376,26 @@ export function CheckInForm() {
                   )}
                 </div>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
-                    <Globe className="w-4 h-4 mr-2 text-blue-600" />
-                    Nationality *
-                  </label>
-                  <Input
-                    value={formData.guest.nationality}
-                    onChange={(e) => handleGuestChange('nationality', e.target.value)}
-                    placeholder="Enter your nationality"
-                    className={`bg-white border-2 ${getFieldError('nationality') ? 'border-red-400 focus:border-red-500' : 'border-blue-200 focus:border-blue-500'} rounded-xl px-4 py-3 transition-all duration-300 focus:ring-2 focus:ring-blue-200`}
-                  />
-                  {getFieldError('nationality') && (
-                    <p className="text-red-500 text-sm flex items-center">
-                      <AlertCircle className="w-4 h-4 mr-1" />
-                      {getFieldError('nationality')}
-                    </p>
-                  )}
-                </div>
+                {formData.segment === 'international' && (
+                  <div className="space-y-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                      <Globe className="w-4 h-4 mr-2 text-blue-600" />
+                      Nationality *
+                    </label>
+                    <Input
+                      value={formData.guest.nationality}
+                      onChange={(e) => handleGuestChange('nationality', e.target.value)}
+                      placeholder="Enter your nationality"
+                      className={`bg-white border-2 ${getFieldError('nationality') ? 'border-red-400 focus:border-red-500' : 'border-blue-200 focus:border-blue-500'} rounded-xl px-4 py-3 transition-all duration-300 focus:ring-2 focus:ring-blue-200`}
+                    />
+                    {getFieldError('nationality') && (
+                      <p className="text-red-500 text-sm flex items-center">
+                        <AlertCircle className="w-4 h-4 mr-1" />
+                        {getFieldError('nationality')}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -380,6 +413,7 @@ export function CheckInForm() {
               onNationalDocumentsChange={(field: string, value: string) => handleForeignDocumentsChange(field as keyof ForeignDocuments, value)}
               onForeignDocumentsChange={handleForeignDocumentsChange}
               getFieldError={getFieldError}
+              onFileSelected={setSelectedFile}
             />
 
             {/* Submit Button */}

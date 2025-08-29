@@ -40,33 +40,34 @@ export async function submitCheckIn(formData: CheckInFormData): Promise<{ succes
     
     const payload = {
       path: `Pending Reservations/${checkInId}`,
-      data: {
-        segment: formData.segment,
-        name: formData.guest.name.trim(),
-        address: formData.guest.address.trim(),
-        phone: formatPhoneNumber(formData.guest.phone),
-        sex: formData.guest.sex,
-        nationality: formData.guest.nationality.trim(),
-        checkInDateTime,
-        checkOutDateTime,
-        nights,
-        adults: formData.stay.adults,
-        children: formData.stay.children,
-        comingFrom: formData.stay.comingFrom.trim(),
-        goingTo: formData.stay.goingTo.trim(),
-        roomType: formData.stay.roomType,
-        photoID: formData.documents.idUploadUrl,
-        passportNumber: formData.documents.passportNumber,
-        passportIssuedAt: formData.documents.passportIssuedAt,
-        passportIssueDate: formData.documents.passportIssueDate,
-        passportValidTill: formData.documents.passportValidTill,
-        visaNumber: formData.documents.visaNumber,
-        visaIssueDate: formData.documents.visaIssueDate,
-        visaValidTill: formData.documents.visaValidTill,
-        dateOfArrivalIndia: formData.documents.dateOfArrivalIndia,
-        cityOfArrivalIndia: formData.documents.cityOfArrivalIndia,
-        idUploadUrl: formData.documents.idUploadUrl,
-      }
+      data: Object.fromEntries(
+        Object.entries({
+          segment: formData.segment,
+          name: formData.guest.name.trim(),
+          address: formData.guest.address.trim(),
+          phone: formatPhoneNumber(formData.guest.phone),
+          sex: formData.guest.sex,
+          nationality: formData.segment === 'national' ? 'Indian' : formData.guest.nationality.trim(),
+          checkInDateTime,
+          checkOutDateTime,
+          adults: formData.stay.adults,
+          children: formData.stay.children,
+          comingFrom: formData.stay.comingFrom.trim(),
+          goingTo: formData.stay.goingTo.trim(),
+          roomType: formData.stay.roomType,
+          photoID: formData.documents.idUploadUrl,
+          passportNumber: formData.documents.passportNumber,
+          passportIssuedAt: formData.documents.passportIssuedAt,
+          passportIssueDate: formData.documents.passportIssueDate,
+          passportValidTill: formData.documents.passportValidTill,
+          visaNumber: formData.documents.visaNumber,
+          visaIssueDate: formData.documents.visaIssueDate,
+          visaValidTill: formData.documents.visaValidTill,
+          dateOfArrivalIndia: formData.documents.dateOfArrivalIndia,
+          cityOfArrivalIndia: formData.documents.cityOfArrivalIndia,
+          idUploadUrl: formData.documents.idUploadUrl,
+        }).filter(([key, value]) => value !== '' && value !== null && value !== undefined)
+      )
     }
     
     const response = await fetch('/api/checkin', {

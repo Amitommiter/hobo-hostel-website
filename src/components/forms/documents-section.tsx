@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input'
 import { ForeignDocuments } from '@/lib/validations'
 import { uploadFile } from '@/lib/utils'
 import { FileText, CreditCard, Camera, AlertCircle, Upload, CheckCircle, Calendar, MapPin } from 'lucide-react'
+import { useState } from 'react'
 
 interface DocumentsSectionProps {
   segment: 'national' | 'international'
@@ -9,23 +10,17 @@ interface DocumentsSectionProps {
   onNationalDocumentsChange: (field: string, value: string) => void
   onForeignDocumentsChange: (field: keyof ForeignDocuments, value: string) => void
   getFieldError: (field: string) => string | undefined
+  onFileSelected?: (file: File | null) => void
 }
 
-export function DocumentsSection({ segment, documents, onNationalDocumentsChange, onForeignDocumentsChange, getFieldError }: DocumentsSectionProps) {
-  const handleFileUpload = async (file: File, field: string, destinationPath: string) => {
-    try {
-      const url = await uploadFile(file, destinationPath)
-      if (segment === 'national') {
-        onNationalDocumentsChange(field, url)
-      } else {
-        onForeignDocumentsChange(field as keyof ForeignDocuments, url)
-      }
-      return url
-    } catch (error) {
-      console.error('Upload failed:', error)
-      alert('File upload failed. Please try again.')
-      return ''
-    }
+export function DocumentsSection({ segment, documents, onNationalDocumentsChange, onForeignDocumentsChange, getFieldError, onFileSelected }: DocumentsSectionProps) {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
+  const handleFileSelection = (file: File) => {
+    setSelectedFile(file)
+    onFileSelected?.(file)
+    // Don't upload immediately, just store the file reference
+    console.log('File selected:', file.name)
   }
 
   return (
@@ -51,19 +46,18 @@ export function DocumentsSection({ segment, documents, onNationalDocumentsChange
               <input
                 type="file"
                 accept="image/*,.pdf"
-                onChange={async (e) => {
+                onChange={(e) => {
                   const file = e.target.files?.[0]
                   if (file) {
-                    const url = await handleFileUpload(file, 'idUploadUrl', 'national-documents')
-                    onNationalDocumentsChange('idUploadUrl', url)
+                    handleFileSelection(file)
                   }
                 }}
                 className="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-orange-500 file:to-red-500 file:text-white hover:file:from-orange-600 hover:file:to-red-600 transition-all duration-300 cursor-pointer"
               />
-              {(documents as { idUploadUrl?: string }).idUploadUrl && (
-                <div className="flex items-center text-green-600 text-sm">
+              {selectedFile && (
+                <div className="flex items-center text-blue-600 text-sm">
                   <CheckCircle className="w-4 h-4 mr-2" />
-                  Document uploaded successfully
+                  File selected: {selectedFile.name}
                 </div>
               )}
             </div>
@@ -280,7 +274,7 @@ export function DocumentsSection({ segment, documents, onNationalDocumentsChange
                     onChange={async (e) => {
                       const file = e.target.files?.[0]
                       if (file) {
-                        const url = await handleFileUpload(file, 'idUploadUrl', 'foreign-documents')
+                        const url = await uploadFile(file, 'foreign-documents')
                         onForeignDocumentsChange('idUploadUrl', url)
                       }
                     }}
