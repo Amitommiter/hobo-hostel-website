@@ -52,6 +52,7 @@ export async function submitCheckIn(formData: CheckInFormData): Promise<{ succes
           checkOutDateTime,
           adults: formData.stay.adults,
           children: formData.stay.children,
+          noOfGuest: formData.stay.adults + formData.stay.children,
           comingFrom: formData.stay.comingFrom.trim(),
           goingTo: formData.stay.goingTo.trim(),
           roomType: formData.stay.roomType,
@@ -65,7 +66,7 @@ export async function submitCheckIn(formData: CheckInFormData): Promise<{ succes
           visaValidTill: formData.documents.visaValidTill,
           dateOfArrivalIndia: formData.documents.dateOfArrivalIndia,
           cityOfArrivalIndia: formData.documents.cityOfArrivalIndia,
-          idUploadUrl: formData.documents.idUploadUrl,
+          idProof: 'link'
         }).filter(([key, value]) => value !== '' && value !== null && value !== undefined)
       )
     }
