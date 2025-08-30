@@ -358,19 +358,16 @@ export function CheckInForm() {
                     <Users className="w-4 h-4 mr-2 text-blue-600" />
                     Sex *
                   </label>
-                  <Select
+                  <select
                     value={formData.guest.sex}
-                    onValueChange={(value) => handleGuestChange('sex', value as 'Female' | 'Male' | 'Transgender')}
+                    onChange={(e) => handleGuestChange('sex', e.target.value as 'Female' | 'Male' | 'Transgender')}
+                    className={`bg-white border-2 ${getFieldError('sex') ? 'border-red-400 focus:border-red-500' : 'border-blue-200 focus:border-blue-500'} rounded-xl px-4 py-3 transition-all duration-300 focus:ring-2 focus:ring-blue-200`}
                   >
-                    <SelectTrigger className={`bg-white border-2 ${getFieldError('sex') ? 'border-red-400 focus:border-red-500' : 'border-blue-200 focus:border-blue-500'} rounded-xl px-4 py-3 transition-all duration-300 focus:ring-2 focus:ring-blue-200`}>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white border border-blue-200 rounded-xl">
-                      <SelectItem value="Female">Female</SelectItem>
-                      <SelectItem value="Male">Male</SelectItem>
-                      <SelectItem value="Transgender">Transgender</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    <option value="">Select your sex</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Transgender">Transgender</option>
+                  </select>
                   {getFieldError('sex') && (
                     <p className="text-red-500 text-sm flex items-center">
                       <AlertCircle className="w-4 h-4 mr-1" />

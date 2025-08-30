@@ -183,19 +183,16 @@ export function StayDetailsSection({ stay, onStayChange, getFieldError }: StayDe
             <Home className="w-4 h-4 mr-2 text-green-600" />
             Room Type *
           </label>
-          <Select
+          <select
             value={stay.roomType}
-            onValueChange={(value) => onStayChange('roomType', value)}
+            onChange={(e) => onStayChange('roomType', e.target.value)}
+            className={`bg-white/80 backdrop-blur-sm border-2 ${getFieldError('roomType') ? 'border-red-400 focus:border-red-500' : 'border-green-200 focus:border-green-500'} rounded-xl px-4 py-3 transition-all duration-300 focus:ring-2 focus:ring-green-200`}
           >
-            <SelectTrigger className={`bg-white/80 backdrop-blur-sm border-2 ${getFieldError('roomType') ? 'border-red-400 focus:border-red-500' : 'border-green-200 focus:border-green-500'} rounded-xl px-4 py-3 transition-all duration-300 focus:ring-2 focus:ring-green-200`}>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="bg-white/95 backdrop-blur-md border border-green-200 rounded-xl">
-              <SelectItem value="mixed-dorm">Mixed Dormitory</SelectItem>
-              <SelectItem value="double-room">Double Room</SelectItem>
-              <SelectItem value="family-room">Family Room</SelectItem>
-            </SelectContent>
-          </Select>
+            <option value="">Select room type</option>
+            <option value="mixed-dorm">Mixed Dormitory</option>
+            <option value="double-room">Double Room</option>
+            <option value="family-room">Family Room</option>
+          </select>
           {getFieldError('roomType') && (
             <p className="text-red-500 text-sm flex items-center">
               <AlertCircle className="w-4 h-4 mr-1" />

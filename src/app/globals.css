@@ -546,10 +546,10 @@ html {
 }
 
 .testimonial-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 20px 40px rgba(147, 51, 234, 0.3),
-    0 0 0 2px rgba(147, 51, 234, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 2px solid;
+  border-color: rgba(147, 51, 234, 0.8);
 }
 
 .testimonial-card .bg-gray-800 {
