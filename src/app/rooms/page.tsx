@@ -29,7 +29,7 @@ export default function RoomsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(120,119,198,0.15),transparent_50%)]"></div>
@@ -37,7 +37,7 @@ export default function RoomsPage() {
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Our <span className="text-purple-400">Rooms</span>
+            Our <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Rooms</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Choose from our carefully designed accommodations, each offering comfort, community, and stunning mountain views
@@ -46,13 +46,18 @@ export default function RoomsPage() {
       </section>
 
       {/* Rooms Grid */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-black relative">
+        {/* Background shadow effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-blue-900/10"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {rooms.map((room, index) => (
               <div
                 key={index}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100 flex flex-col h-full"
+                className="group bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-800 flex flex-col h-full hover:shadow-purple-500/20 hover:border-purple-500/50"
               >
                 {/* Room Header - Single Photo with Better View */}
                 <div className="relative h-48 overflow-hidden">
@@ -98,15 +103,15 @@ export default function RoomsPage() {
 
                 {/* Room Content */}
                 <div className="p-6 flex flex-col flex-1">
-                  <p className="text-gray-600 mb-6 leading-relaxed">{room.description}</p>
+                  <p className="text-gray-300 mb-6 leading-relaxed">{room.description}</p>
 
                   {/* Features */}
                   <div className="space-y-3 mb-6 flex-1">
-                    <h4 className="font-semibold text-gray-900 mb-3">Room Features:</h4>
+                    <h4 className="font-semibold text-white mb-3">Room Features:</h4>
                     <div className="grid grid-cols-2 gap-2">
                       {room.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center text-sm text-gray-600">
-                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                        <div key={featureIndex} className="flex items-center text-sm text-gray-300">
+                          <CheckCircle className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
                           {feature}
                         </div>
                       ))}
@@ -116,7 +121,7 @@ export default function RoomsPage() {
                   {/* CTA Button - All same color and aligned */}
                   <div className="mt-auto">
                     <Button
-                      className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-xl py-3 font-semibold transition-all duration-300"
+                      className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-xl py-3 font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/25 hover:shadow-xl"
                       asChild
                     >
                       <Link href={room.link} className="flex items-center justify-center">
@@ -133,13 +138,18 @@ export default function RoomsPage() {
       </section>
 
       {/* Amenities Section */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-black relative">
+        {/* Background shadow effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-green-900/10 via-transparent to-orange-900/10"></div>
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-green-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               All Rooms Include
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Essential amenities available in all our accommodations
             </p>
           </div>
@@ -150,36 +160,41 @@ export default function RoomsPage() {
                 icon: Wifi,
                 title: "Free Wi-Fi",
                 description: "High-speed internet in all rooms and common areas",
-                color: "text-blue-600"
+                color: "text-blue-400"
               },
               {
                 icon: Shield,
                 title: "24/7 Security",
                 description: "Round-the-clock check-in and security monitoring",
-                color: "text-green-600"
+                color: "text-green-400"
               },
               {
                 icon: Eye,
                 title: "Mountain Views",
                 description: "Balconies with breathtaking Himalayan vistas",
-                color: "text-purple-600"
+                color: "text-purple-400"
               },
               {
                 icon: Zap,
                 title: "Modern Amenities",
                 description: "Charging points and reading lights in every bed",
-                color: "text-orange-600"
+                color: "text-orange-400"
               }
             ].map((feature, index) => (
               <div 
                 key={index}
-                className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 text-center"
+                className={`group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 text-center ${
+                  index === 0 ? 'hover:shadow-blue-500/20 hover:border-blue-500/50' :
+                  index === 1 ? 'hover:shadow-green-500/20 hover:border-green-500/50' :
+                  index === 2 ? 'hover:shadow-purple-500/20 hover:border-purple-500/50' :
+                  'hover:shadow-orange-500/20 hover:border-orange-500/50'
+                }`}
               >
-                <div className={`w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:bg-purple-50 transition-colors duration-300`}>
+                <div className={`w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:bg-gray-700 transition-colors duration-300`}>
                   <feature.icon className={`h-8 w-8 ${feature.color}`} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -191,6 +206,11 @@ export default function RoomsPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(120,119,198,0.15),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,119,198,0.1),transparent_50%)]"></div>
         
+        {/* Additional background shadow effects */}
+        <div className="absolute top-0 left-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/5 rounded-full blur-2xl"></div>
+        
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to Book Your Stay?
@@ -201,7 +221,7 @@ export default function RoomsPage() {
           <Button 
             size="lg" 
             variant="secondary"
-            className="group bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-white/25 transition-all duration-300 transform hover:scale-105"
+            className="group bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-white/25 transition-all duration-300 transform hover:scale-105"
             asChild
           >
             <Link href="/forms/checkin" className="flex items-center">

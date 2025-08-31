@@ -3,21 +3,40 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Rooms', href: '/rooms' },
-  { name: 'Culture', href: '/culture' },
-  { name: 'Location', href: '/location' },
-  { name: 'Contact', href: '/contact' },
   { name: 'Shop', href: '/shop' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const savedCart = localStorage.getItem('hobo-cart')
+      if (savedCart) {
+        const cartItems = JSON.parse(savedCart)
+        const count = cartItems.reduce((total: number, item: any) => total + item.quantity, 0)
+        setCartCount(count)
+      }
+    }
+
+    updateCartCount()
+    window.addEventListener('storage', updateCartCount)
+    window.addEventListener('cartUpdated', updateCartCount)
+    
+    return () => {
+      window.removeEventListener('storage', updateCartCount)
+      window.removeEventListener('cartUpdated', updateCartCount)
+    }
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,7 +99,21 @@ export function Header() {
           ))}
         </div>
         
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
+          <Link href="/cart" className="relative">
+            <div className={`p-2 rounded-lg transition-all duration-300 ${
+              isScrolled 
+                ? 'text-gray-700 hover:bg-gray-100' 
+                : 'text-white hover:bg-white/20'
+            }`}>
+              <ShoppingCart className="h-6 w-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                  {cartCount}
+                </span>
+              )}
+            </div>
+          </Link>
           <Link href="/contact">
             <Button 
               variant={isScrolled ? "outline" : "default"} 
@@ -149,7 +182,15 @@ export function Header() {
                       </Link>
                     ))}
                   </div>
-                  <div className="py-6">
+                  <div className="py-6 space-y-4">
+                    <Link href="/cart" className="flex items-center justify-between -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      <span>Cart</span>
+                      {cartCount > 0 && (
+                        <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                          {cartCount}
+                        </span>
+                      )}
+                    </Link>
                     <Link href="/contact">
                       <Button className="w-full">
                         Book Now

@@ -61,11 +61,6 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/culture" className="text-gray-300 hover:text-white transition-colors">
-                    Local Culture
-                  </Link>
-                </li>
-                <li>
                   <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
                     Contact Us
                   </Link>

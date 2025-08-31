@@ -4,13 +4,10 @@ A modern, responsive hostel website built with Next.js, featuring a hidden check
 
 ## Features
 
-### Public Pages
-- **Home**: Hero section, features, room previews
-- **Rooms**: Mixed dorm and private room details
-- **Culture**: Local experiences and activities
-- **Contact**: Contact information and FAQ
-- **Shop**: Coming soon page
-- **Terms & Privacy**: Legal pages
+- **Rooms**: Different types of accommodations
+- **Location**: Information about the hostel's location
+- **Contact**: Easy way to get in touch
+- **Booking**: Online check-in form
 
 ### Hidden Features
 - **Check-in Form**: Hidden route at `/forms/checkin` with segmented National vs Foreign National forms
@@ -182,12 +179,7 @@ public/assets/images/
 │       ├── hero.jpg
 │       ├── 01.jpg
 │       └── 02.jpg
-├── culture/
-│   ├── hero.jpg
-│   ├── 01.jpg
-│   ├── 02.jpg
-│   ├── 03.jpg
-│   └── 04.jpg
+
 └── contact/
     └── map.jpg
 ```
