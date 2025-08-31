@@ -26,6 +26,7 @@ export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     if (typeof window !== 'undefined') {
       const savedCart = localStorage.getItem('hobo-cart')
@@ -156,9 +157,18 @@ export default function ShopPage() {
           </div>
 
           {loading && (
-            <div className="text-center py-20">
-              <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-purple-500"></div>
-              <p className="text-gray-300 mt-6 text-lg">Loading products...</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(6)].map((_, index) => (
+                <div key={index} className="bg-gray-900 rounded-2xl overflow-hidden shadow-lg h-full animate-pulse">
+                  <div className="h-80 bg-gray-800"></div>
+                  <div className="p-10 space-y-4">
+                    <div className="h-6 bg-gray-800 rounded"></div>
+                    <div className="h-4 bg-gray-800 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-800 rounded w-1/2"></div>
+                    <div className="h-8 bg-gray-800 rounded w-1/3"></div>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
