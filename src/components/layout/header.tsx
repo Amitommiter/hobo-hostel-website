@@ -6,6 +6,15 @@ import { useState, useEffect } from 'react'
 import { Menu, X, ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+interface CartItem {
+  id: string
+  name: string
+  price: number
+  description: string
+  unit?: string
+  quantity: number
+}
+
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Rooms', href: '/rooms' },
@@ -23,7 +32,7 @@ export function Header() {
       const savedCart = localStorage.getItem('hobo-cart')
       if (savedCart) {
         const cartItems = JSON.parse(savedCart)
-        const count = cartItems.reduce((total: number, item: any) => total + item.quantity, 0)
+        const count = cartItems.reduce((total: number, item: CartItem) => total + item.quantity, 0)
         setCartCount(count)
       }
     }
