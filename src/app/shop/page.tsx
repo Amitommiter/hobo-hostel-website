@@ -187,7 +187,7 @@ export default function ShopPage() {
           )}
 
           {!loading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {products.map((product) => (
                 <div
                   key={product.id}
@@ -195,7 +195,7 @@ export default function ShopPage() {
                 >
                   {/* Product Image */}
                   <div 
-                    className="h-80 relative overflow-hidden cursor-pointer"
+                    className="h-64 sm:h-72 md:h-80 relative overflow-hidden cursor-pointer"
                     onClick={() => openProductModal(product)}
                   >
                     <Image
@@ -221,30 +221,30 @@ export default function ShopPage() {
                   </div>
 
                   {/* Product Info */}
-                  <div className="p-10 flex-1 flex flex-col">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors">
+                  <div className="p-6 md:p-10 flex-1 flex flex-col">
+                    <div className="flex items-center justify-between mb-3 md:mb-4">
+                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white group-hover:text-purple-400 transition-colors">
                         {product.name}
                       </h3>
                       <div className="flex items-center">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                          <Star key={i} className="w-4 h-4 md:w-5 md:h-5 text-yellow-400 fill-current" />
                         ))}
                       </div>
                     </div>
 
-                    <p className="text-gray-300 text-base mb-8 line-clamp-3 flex-1">
+                    <p className="text-sm md:text-base text-gray-300 mb-6 md:mb-8 line-clamp-3 flex-1">
                       {product.description}
                     </p>
 
                     <div className="mt-auto">
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <div className="flex flex-col space-y-1">
-                          <span className="text-3xl font-bold text-purple-400">
+                          <span className="text-2xl md:text-3xl font-bold text-purple-400">
                             ₹{product.price}
                           </span>
                           {product.unit && (
-                            <span className="text-gray-400 text-sm">
+                            <span className="text-gray-400 text-xs md:text-sm">
                               per {product.unit}
                             </span>
                           )}
@@ -252,10 +252,10 @@ export default function ShopPage() {
                         
                         <button 
                           onClick={() => addToCart(product)}
-                          className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors font-semibold"
+                          className="flex items-center justify-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors font-semibold text-sm md:text-base"
                         >
                           <ShoppingCart className="w-4 h-4" />
-                          <span className="text-sm">Add to Cart</span>
+                          <span>Add to Cart</span>
                         </button>
                       </div>
                     </div>

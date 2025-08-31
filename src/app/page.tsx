@@ -239,26 +239,26 @@ export default function HomePage() {
 
               {/* Main Heading with Enhanced Typography */}
               <div className="space-y-4 md:space-y-6 animate-fade-in-up animation-delay-200">
-                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight group text-center md:text-left">
+                <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight group text-center md:text-left">
                   <span className="block text-white drop-shadow-2xl animate-slide-in-left group-hover:scale-105 transition-transform duration-500">Welcome to</span>
                   <span className="block drop-shadow-2xl group-hover:scale-110 transition-transform duration-500 cursor-pointer">
                     <span className="typewriter-text text-yellow-300">Hobo Hostel</span>
                   </span>
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white max-w-xl mx-auto text-center leading-relaxed drop-shadow-2xl font-light">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white max-w-xl mx-auto text-center leading-relaxed drop-shadow-2xl font-light px-4">
                   Where <span className="text-yellow-300 font-normal">adventure meets comfort</span> in the heart of the Himalayas. 
                   Connect with fellow travelers and create memories that last a lifetime.
                 </p>
               </div>
 
               {/* Enhanced CTA Buttons with Micro-interactions */}
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-6 animate-fade-in-up animation-delay-400">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-6 animate-fade-in-up animation-delay-400 px-4">
                 <Button 
                   size="lg" 
-                  className="group bg-black/50 backdrop-blur-md hover:bg-black/70 text-white px-6 md:px-10 py-3 md:py-5 text-sm md:text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 border border-yellow-400/50 hover:border-yellow-400"
+                  className="group bg-black/50 backdrop-blur-md hover:bg-black/70 text-white px-4 sm:px-6 md:px-10 py-3 md:py-5 text-sm md:text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 border border-yellow-400/50 hover:border-yellow-400"
                   asChild
                 >
-                  <Link href="/rooms" className="flex items-center">
+                  <Link href="/rooms" className="flex items-center justify-center">
                     <span>Book Your Adventure</span>
                     <ArrowRight className="ml-2 md:ml-3 h-4 w-4 md:h-6 md:w-6 group-hover:translate-x-2 transition-transform duration-300" />
                   </Link>
@@ -267,10 +267,10 @@ export default function HomePage() {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="group border-2 border-white/60 text-white hover:bg-white/20 px-6 md:px-10 py-3 md:py-5 text-sm md:text-lg font-semibold rounded-2xl backdrop-blur-md transition-all duration-500 hover:border-white/80 hover:scale-110 hover:-translate-y-1 shadow-2xl hover:shadow-white/25 bg-black/30"
+                  className="group border-2 border-white/60 text-white hover:bg-white/20 px-4 sm:px-6 md:px-10 py-3 md:py-5 text-sm md:text-lg font-semibold rounded-2xl backdrop-blur-md transition-all duration-500 hover:border-white/80 hover:scale-110 hover:-translate-y-1 shadow-2xl hover:shadow-white/25 bg-black/30"
                   asChild
                 >
-                  <Link href="/rooms" className="flex items-center">
+                  <Link href="/rooms" className="flex items-center justify-center">
                     <ArrowRight className="w-4 h-4 mr-2" />
                     Explore Rooms
                   </Link>
@@ -301,7 +301,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
                   icon: Wifi,
@@ -342,13 +342,13 @@ export default function HomePage() {
               ].map((feature, index) => (
                 <div 
                   key={index} 
-                  className="group bg-gray-900 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 hover:border-gray-700"
+                  className="group bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 hover:border-gray-700"
                 >
-                  <div className="w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center mb-6 group-hover:bg-gray-700 transition-colors duration-300">
-                    <feature.icon className={`h-8 w-8 ${feature.color}`} />
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-800 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-gray-700 transition-colors duration-300">
+                    <feature.icon className={`h-6 w-6 md:h-8 md:w-8 ${feature.color}`} />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{feature.description}</p>
+                  <h3 className="text-lg md:text-xl font-semibold text-white mb-3 md:mb-4">{feature.title}</h3>
+                  <p className="text-sm md:text-base text-gray-300 leading-relaxed">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -511,10 +511,10 @@ export default function HomePage() {
                 {/* Cottage Photo 10 */}
                 <div 
                   className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:z-50 flex-shrink-0 w-80 h-80 cursor-pointer"
-                  onClick={() => setSelectedImage("/assets/images/cottage/ entrance.jpg")}
+                  onClick={() => setSelectedImage("/assets/images/cottage/entrance.jpg")}
                 >
                   <Image 
-                    src="/assets/images/cottage/ entrance.jpg" 
+                    src="/assets/images/cottage/entrance.jpg" 
                     alt="Cottage entrance" 
                     fill
                     className="object-cover transition-transform duration-500"
@@ -537,7 +537,7 @@ export default function HomePage() {
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </Button>
-          </div>
+            </div>
         </section>
 
         {/* Rooms Section */}
@@ -912,11 +912,11 @@ export default function HomePage() {
 
         {/* Infinite Carousel Container - Full Width */}
         <div className="relative overflow-hidden py-8">
-          <div className="testimonial-scroll-container flex">
+          <div className="testimonial-scroll-container flex gap-4">
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <div 
                 key={index} 
-                className="w-full md:w-1/4 px-4 flex-shrink-0"
+                className="w-full md:w-1/4 px-4 flex-shrink-0 sm:px-4"
                 style={{ width: `${100 / 4}%` }}
               >
                 <div className="bg-gray-800 rounded-2xl p-4 hover:bg-gray-750 transition-all duration-500 border border-gray-700 hover:border-orange-500/50 h-80 testimonial-card">

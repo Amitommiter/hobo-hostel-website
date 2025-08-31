@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { MapPin, Phone, Mail, Clock, ChevronDown, Navigation, Compass, Mountain, Star, Coffee, Heart, Wifi, Car } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, ChevronDown, Navigation, Compass, Mountain, Star, Coffee, Heart, Wifi, Car, MessageCircle } from 'lucide-react'
 
 const contactInfo = [
   {
@@ -67,7 +67,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero Section with Enhanced Creativity */}
-      <section className="relative py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
+      <section className="relative py-16 md:py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
         {/* Animated mountain silhouettes */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(120,119,198,0.15),transparent_50%)]"></div>
@@ -75,17 +75,17 @@ export default function ContactPage() {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center text-white">
-            <div className="mb-6">
-              <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 animate-fade-in-up">
-                <Star className="w-5 h-5 text-purple-300 animate-spin" style={{animationDuration: '3s'}} />
-                <span className="text-sm font-medium">Get in Touch</span>
-                <Star className="w-5 h-5 text-purple-300 animate-spin" style={{animationDuration: '3s', animationDirection: 'reverse'}} />
+            <div className="mb-4 md:mb-6">
+              <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 md:px-6 py-2 md:py-3 animate-fade-in-up">
+                <Star className="w-4 h-4 md:w-5 md:h-5 text-purple-300 animate-spin" style={{animationDuration: '3s'}} />
+                <span className="text-xs md:text-sm font-medium">Get in Touch</span>
+                <Star className="w-4 h-4 md:w-5 md:h-5 text-purple-300 animate-spin" style={{animationDuration: '3s', animationDirection: 'reverse'}} />
               </div>
             </div>
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 animate-fade-in-up animation-delay-200">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 animate-fade-in-up animation-delay-200">
               Contact <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Us</span>
             </h1>
-            <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-400">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-400 px-4">
               Ready to start your Himalayan adventure? We&apos;re here to help make your stay unforgettable.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function ContactPage() {
       {/* Contact Information */}
       <section className="py-8 md:py-20 relative z-10 bg-black">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
             {/* Contact Info */}
             <div className="relative h-full">
               <div className="relative bg-gray-900 rounded-xl md:rounded-2xl p-3 md:p-6 shadow-2xl border border-gray-800 h-full flex flex-col justify-between">

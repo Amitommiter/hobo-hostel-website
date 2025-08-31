@@ -603,3 +603,113 @@ html {
 .testimonial-card:hover::before {
   opacity: 1;
 }
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes testimonial-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.testimonial-scroll-container {
+  animation: testimonial-scroll 60s linear infinite;
+}
+
+.testimonial-card {
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 0 30px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 255, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.5);
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(255, 165, 0, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.testimonial-card .bg-gray-800 {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes photo-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.room-card-gallery {
+  width: 200%;
+  animation: photo-scroll 30s linear infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@media (max-width: 768px) {
+  .testimonial-scroll-container {
+    animation: testimonial-scroll 40s linear infinite;
+  }
+  
+  .testimonial-card {
+    min-width: 320px;
+    max-width: 380px;
+    width: 320px !important;
+  }
+  
+  .testimonial-card .bg-gray-800 {
+    padding: 1rem;
+  }
+  
+  .testimonial-card h4 {
+    font-size: 0.875rem;
+  }
+  
+  .testimonial-card p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  
+  .testimonial-card .text-sm {
+    font-size: 0.75rem;
+  }
+}
