@@ -81,12 +81,16 @@ export default function ShopPage() {
 
   // Function to get the correct image path for each product
   const getProductImagePath = (productId: string) => {
-    // Try different extensions and cases
-    const extensions = ['.jpg', '.png', '.jpeg']
-    const basePath = `/assets/images/products/${productId}`
+    // Handle specific product ID mappings
+    const imageMap: { [key: string]: string } = {
+      'hazelNut': 'hazelnut',
+      'pineNut': 'pineNut',
+      'blackCumin': 'blackCumin',
+      'redRice': 'redRice'
+    }
     
-    // Return the base path with .jpg extension (most common)
-    return `${basePath}.jpg`
+    const imageName = imageMap[productId] || productId
+    return `/assets/images/products/${imageName}.jpg`
   }
 
   useEffect(() => {
